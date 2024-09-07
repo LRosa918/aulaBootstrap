@@ -1,0 +1,115 @@
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura o viewport para garantir que a página seja exibida corretamente em dispositivos móveis -->
+    <title>Inicio</title> <!-- Define o título da página, que aparece na aba do navegador -->
+
+    <!-- Inclua o CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Adiciona o arquivo CSS do Bootstrap para aplicar estilos pré-definidos e componentes -->
+
+    <style>
+        /* Estilo para a imagem de fundo */
+        body {
+            background-image: url("/imagens/80s-car.gif"); /* Define a imagem de fundo da página. A URL especifica onde a imagem está localizada */
+            background-size: cover; /* Faz com que a imagem de fundo cubra toda a área da página, sem repetir e sem deixar espaços em branco */
+            background-position: center; /* Centraliza a imagem de fundo na página */
+            background-attachment: fixed; /* Faz com que a imagem de fundo não se mova quando a página é rolada */
+            padding-top: 2.3cm; /* Define o espaço superior interno da página para o conteúdo */
+        }
+
+        /* Estilo personalizado para o botão de dropdown (configurações)*/
+        .dropdown-toggle-custom {
+            background-color: #573bb5; /* Define a cor de fundo do botão do dropdown */
+            color: white; /* Define a cor do texto do botão do dropdown */
+            transition: background-color 0.3s; /* Adiciona uma transição suave na cor de fundo do botão quando alterada */
+        }
+
+        /*interação do dropdown com o mouse*/
+        .dropdown-toggle-custom:hover {
+            background-color: #81009b; /* Define a cor de fundo do botão quando o mouse está sobre ele */
+            color: white; /* Mantém a cor do texto como branca quando o mouse está sobre o botão */
+        }
+
+        /* Remove a transparência do botão quando ele está focado ou ativo */
+        .dropdown-toggle-custom:focus, .dropdown-toggle-custom:active {
+            background-color: #a900a3 !important; /* Define uma cor sólida para o botão quando ele está focado ou ativo */
+            color: white !important; /* Mantém a cor do texto como branca quando o botão está em foco ou ativo */
+            
+        }
+
+        /* Estilo personalizado para o menu do dropdown */
+        .dropdown-menu-custom {
+            background-color: #E2E8F0; /* Define a cor de fundo do menu do dropdown */
+            overflow: hidden; /* Garante que o conteúdo do menu não ultrapasse os limites do contêiner */
+            max-height: 300px; /* Define a altura máxima do menu do dropdown para evitar que sobreponha outros conteúdos */
+        }
+
+        /* Estilo personalizado para os itens do menu do dropdown */
+        .dropdown-item-custom {
+           color: #000000; /* Define a cor do texto dos itens do menu do dropdown */
+           transition: transform 0.3s, background-color 0.3s; /* Adiciona uma transição suave para o aumento de tamanho e mudança de cor dos itens quando o mouse passa sobre eles */
+        }
+
+        .dropdown-item-custom:hover {
+            background-color: #a900a3; /* Define a cor de fundo dos itens do menu quando o mouse está sobre eles */
+            color: #ffffff; /* Define a cor do texto dos itens quando o mouse está sobre eles */
+            text-align: center; /* Centraliza o texto dos itens do menu */
+            transform: scale(1.2); /* Aumenta o tamanho dos itens em 20% quando o mouse está sobre eles */
+            z-index: 10; /* Garante que o item esteja acima dos outros itens do menu do dropdown */
+        }
+
+        /* Estilo personalizado para os itens do list group */
+        .list-group-item-custom {
+            background-color: #EDF2F7; /* Define a cor de fundo dos itens do list group */
+            color: #2D3748; /* Define a cor do texto dos itens do list group */
+        }
+
+        .list-group-item-custom:hover {
+            background-color: #E2E8F0; /* Define a cor de fundo dos itens do list group quando o mouse está sobre eles */
+        }
+
+        /* Ajustes no container para melhorar a visibilidade sobre o fundo */
+        .container {
+            background-color: rgba(255, 255, 255, 0.563); /* Define a cor de fundo com opacidade para o container para melhorar a visibilidade sobre o fundo */
+            border-radius: 10px; /* Adiciona bordas arredondadas ao container */
+            padding: 20px; /* Adiciona espaçamento interno ao container */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5"> <!-- Cria um contêiner com uma margem superior de 5 unidades de espaçamento do Bootstrap -->
+    <!-- Exemplo de list group com dropdown integrado -->
+    <div class="list-group"> <!-- Cria um grupo de itens, geralmente usado para listas verticais -->
+        <!-- Item do list group com link para o dashboard -->
+        <a href="/html/dashboard.html" class="list-group-item list-group-item-custom">Dashboard</a> <!-- Cria um link que leva à página do dashboard e aplica os estilos personalizados ao item -->
+        <!-- Item do list group com link para explorar criatividade -->
+        <a href="/html/draw.html" class="list-group-item list-group-item-custom">Explore sua criatividade</a> <!-- Cria um link para a página de explorar criatividade e aplica os estilos personalizados ao item -->
+
+        <!-- Corrigi a estrutura do dropdown -->
+        <div class="dropdown"> <!-- Cria um contêiner para o dropdown, que é um menu suspenso -->
+            <!-- Botão do dropdown que funciona ao clicar -->
+            <button class="btn dropdown-toggle-custom dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Configurações
+            </button> <!-- Cria um botão que, ao ser clicado, exibe o menu do dropdown -->
+
+            <!-- Itens do dropdown -->
+            <ul class="dropdown-menu dropdown-menu-custom w-100" aria-labelledby="dropdownMenuButton"> <!-- Cria uma lista não ordenada para os itens do menu do dropdown -->
+                <!-- Item do menu dropdown para perfil -->
+                <li><a class="dropdown-item dropdown-item-custom" href="/html/perfil.html">Perfil</a></li> <!-- Cria um item de lista com um link para a página de perfil e aplica os estilos personalizados -->
+                <!-- Item do menu dropdown para notificações -->
+                <li><a class="dropdown-item dropdown-item-custom" href="#">Notificações</a></li> <!-- Cria um item de lista com um link para notificações e aplica os estilos personalizados -->
+                <!-- Item do menu dropdown para privacidade -->
+                <li><a class="dropdown-item dropdown-item-custom" href="#">Privacidade</a></li> <!-- Cria um item de lista com um link para configurações de privacidade e aplica os estilos personalizados -->
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- Inclua o JS do Bootstrap no final do body para garantir que o DOM seja carregado antes -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Inclui o arquivo JavaScript do Bootstrap para adicionar funcionalidades interativas, como o comportamento do dropdown -->
+
+</body>
+</html>

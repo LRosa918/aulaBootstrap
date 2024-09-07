@@ -1,0 +1,188 @@
+<!DOCTYPE html> <!-- Declaração do tipo de documento HTML5 -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 para suportar caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Define a escala da página para dispositivos móveis -->
+    <title>Perfil</title> <!-- Define o título da página, que aparece na aba do navegador -->
+
+    <!-- Inclua o CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Importa o CSS do Bootstrap para estilos prontos e responsivos -->
+
+    <!-- Inclua o CSS para ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"> <!-- Importa o CSS para ícones do Bootstrap -->
+
+    <style>
+        /* Fundo animado com gradiente */
+        body {
+            margin: 0; /* Remove a margem padrão do corpo da página */
+            padding: 0; /* Remove o padding padrão do corpo da página */
+            height: 100vh; /* Define a altura do corpo da página para 100% da altura da viewport */
+            background-color: white; /* Define a cor de fundo padrão como branca */
+            transition: background-color 0.3s, color 0.0s; /* Transição suave para mudanças na cor de fundo */
+        }
+
+        /* Modo noturno */
+        .dark-mode {
+            background-color: #000; /* Define a cor de fundo como preta para o modo noturno */
+            color: #fff; /* Define a cor do texto como branca para o modo noturno */
+        }
+
+        /* Modo noturno para o container */
+        .dark-mode .profile-info {
+            background-color: #333; /* Define o fundo do container de perfil como cinza escuro para o modo noturno */
+            color: #fff; /* Define a cor do texto dentro do container como branca para o modo noturno */
+        }
+
+        /* Estilo para a foto de perfil */
+        .profile-img {
+            width: 260px; /* Define a largura da foto de perfil */
+            height: 260px; /* Define a altura da foto de perfil */
+            border-radius: 50%; /* Faz com que a foto de perfil tenha bordas arredondadas em formato circular */
+            object-fit: cover; /* Garante que a imagem cubra todo o espaço sem distorcer */
+            border: 3px solid #8e44ad; /* Adiciona uma borda roxa de 3 pixels ao redor da foto */
+            box-shadow: 0 4px 8px rgba(142, 68, 173, 0.5); /* Adiciona uma sombra roxa ao redor da foto */
+        }
+
+        /* Estilo para a seção de informações */
+        .profile-info {
+            background-color: rgba(255, 255, 255, 0.9); /* Define o fundo como branco semi-transparente para o container de informações */
+            padding: 50px; /* Adiciona um padding interno de 50 pixels ao container */
+            border-radius: 10px; /* Arredonda os cantos do container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destaque */
+            transition: background-color 0.3s, color 0.3s; /* Transição suave para mudanças na cor de fundo e texto */
+        }
+
+        /* Estilo para o título da seção */
+        .profile-info h2 {
+            color: #8e44ad; /* Define a cor do título como roxa */
+        }
+
+        /* Estilo para os ícones de redes sociais */
+        .social-icons {
+            display: flex; /* Usa flexbox para alinhar os ícones horizontalmente */
+            flex-wrap: wrap; /* Permite que os ícones se movam para a linha seguinte se necessário */
+            gap: 10px; /* Define o espaçamento entre os ícones */
+        }
+
+        /* Estilo para os ícones de redes sociais */
+        .social-icons a {
+            font-size: 24px; /* Define o tamanho dos ícones */
+            color: #8e44ad; /* Define a cor dos ícones como roxa */
+            margin-right: 15px; /* Adiciona uma margem à direita dos ícones */
+        }
+
+        .social-icons a:hover {
+            color: #732d91; /* Define a cor dos ícones como roxa mais escura ao passar o mouse */
+            transform: scale(1.5); /* Aumenta o tamanho dos ícones em 50% ao passar o mouse */
+        }
+
+        /* Estilo do botão de sair */
+        .btn-sair {
+            position: fixed; /* Posiciona o botão fixo na tela, independentemente do rolar da página */
+            right: 20px; /* Define a margem direita do botão para 20 pixels */
+            top: 20px; /* Define a margem superior do botão para 20 pixels */
+            font-size: 14px; /* Define o tamanho da fonte do botão */
+            padding: 5px 10px; /* Adiciona padding interno ao botão */
+            background-color: #5b0082; /* Define a cor de fundo do botão como roxa */
+            color: white; /* Define a cor do texto do botão como branca */
+            border: none; /* Remove a borda padrão do botão */
+            border-radius: 5px; /* Arredonda os cantos do botão */
+        }
+
+        .btn-sair:hover {
+            background-color: #732d91; /* Define a cor de fundo do botão como roxa mais escura ao passar o mouse */
+            color: white; /* Mantém a cor do texto como branca ao passar o mouse */
+            transform: scale(1.5); /* Aumenta o tamanho do botão em 50% ao passar o mouse */
+        }
+
+        /* Estilo para o botão de modo noturno com formato de lua */
+        .btn-toggle-mode {
+            position: fixed; /* Posiciona o botão fixo na tela */
+            left: 20px; /* Define a margem esquerda do botão para 20 pixels */
+            top: 35px; /* Define a margem superior do botão para 35 pixels */
+            font-size: 24px; /* Define o tamanho do ícone no botão */
+            width: 50px; /* Define a largura do botão */
+            height: 50px; /* Define a altura do botão */
+            display: flex; /* Usa flexbox para alinhar o conteúdo no centro */
+            align-items: center; /* Alinha o conteúdo verticalmente no centro */
+            justify-content: center; /* Alinha o conteúdo horizontalmente no centro */
+            background-color: #8e44ad; /* Define a cor de fundo do botão como roxa */
+            color: white; /* Define a cor do ícone como branca */
+            border: none; /* Remove a borda padrão do botão */
+            border-radius: 50%; /* Faz o botão circular */
+            cursor: pointer; /* Muda o cursor para um ponteiro ao passar sobre o botão */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para destacar o botão */
+            transition: background-color 0.3s, transform 0.3s; /* Transição suave para mudanças na cor e tamanho do botão */
+        }
+
+        .btn-toggle-mode:hover {
+            background-color: #732d91; /* Define a cor de fundo do botão como roxa mais escura ao passar o mouse */
+            transform: scale(1.2); /* Aumenta o tamanho do botão em 20% ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botão de modo noturno no canto superior direito -->
+<button class="btn btn-light btn-toggle-mode" onclick="toggleDarkMode()">
+    <i id="mode-icon" class="bi bi-moon"></i> <!-- Ícone de lua que muda para sol -->
+</button>
+
+<!-- Botão de sair no canto superior direito -->
+<a href="/html/Atv.bootstrap.html" class="btn btn-light btn-sair">Sair</a>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <!-- Foto de perfil -->
+            <img src="/imagens/22127325-mulher-avatar-foto-espaco-reservado-icone-penteado-ondulado-fluindo-cabelo-vetor.jpg" alt="Foto de Perfil" class="profile-img">
+        </div>
+        <div class="col-md-8">
+            <!-- Informações do perfil -->
+            <div class="profile-info">
+                <h2>Fulana de Tal</h2>
+                <p><strong>Bio:</strong> Sou uma desenvolvedora web apaixonada por criar experiências incríveis na web. Adoro aprender novas tecnologias e enfrentar desafios interessantes.</p>
+
+                <h4>Informações de Contato</h4>
+                <ul class="list-unstyled">
+                    <li><strong>Email:</strong> usuaria@bootstrap.com</li>
+                    <li><strong>Telefone:</strong> (11) 98765-4321</li>
+                </ul>
+
+                <h4>Redes Sociais</h4>
+                <div class="social-icons">
+                    <!-- Links para redes sociais com ícones do Bootstrap -->
+                    <a href="https://facebook.com" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" title="Twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inclua o JS do Bootstrap no final do body para garantir que o DOM seja carregado antes -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Inclua ícones Bootstrap para redes sociais -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.js"></script>
+
+<script>
+    // Função para alternar entre modo claro e modo noturno
+    function toggleDarkMode() {
+        // Adiciona ou remove a classe 'dark-mode' ao corpo do documento
+        document.body.classList.toggle('dark-mode');
+
+        // Alterna o ícone entre lua e sol
+        const modeIcon = document.getElementById('mode-icon');
+        if (document.body.classList.contains('dark-mode')) {
+            modeIcon.classList.remove('bi-moon');
+            modeIcon.classList.add('bi-sun');
+        } else {
+            modeIcon.classList.remove('bi-sun');
+            modeIcon.classList.add('bi-moon');
+        }
+    }
+</script>
+
+</body>
+</html>

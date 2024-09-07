@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!-- Declara que o documento é um HTML5 -->
+<html lang="pt-BR">
+<!-- Define o idioma da página como português do Brasil -->
+<head>
+    <meta charset="UTF-8">
+    <!-- Define o conjunto de caracteres como UTF-8, suportando caracteres especiais e acentuação -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define a largura da viewport para corresponder à largura do dispositivo e a escala inicial para 1 -->
+    <title>Área de Desenho</title>
+    <!-- Define o título da página que será exibido na aba do navegador -->
+
+    <!-- Inclua o CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Importa o CSS do Bootstrap a partir de uma CDN para estilizar a página -->
+
+    <style>
+        /* Estilo personalizado para a página */
+        
+        body {
+            background-image: url("/imagens/c22c34_3e9ef9b088ae4c79be9abc677ece1ce5~mv2.gif");
+            /* Define a imagem de fundo para o corpo da página */
+            background-size: cover;
+            /* Faz a imagem de fundo cobrir toda a área do corpo, sem deixar espaços em branco */
+            background-position: center;
+            /* Centraliza a imagem de fundo */
+            background-attachment: fixed;
+            /* Mantém a imagem de fundo fixa durante o rolar da página, não se move com o conteúdo */
+            margin: 0;
+            /* Remove a margem padrão do corpo do documento */
+            padding: 0;
+            /* Remove o padding padrão do corpo do documento */
+        }
+
+        /* Estilo para o container do título */
+        .title-container {
+            background-color: rgba(255, 255, 255, 0.696);
+            /* Define a cor de fundo como branca com 69.6% de opacidade, tornando o fundo semi-transparente */
+            border-radius: 5px;
+            /* Arredonda os cantos do container em 5 pixels */
+            padding: 10px;
+            /* Adiciona 10 pixels de espaçamento interno ao redor do conteúdo do container */
+            margin: 20px auto;
+            /* Adiciona 20 pixels de margem superior e inferior e centraliza o container horizontalmente */
+            max-width: 400px;
+            /* Define a largura máxima do container para 400 pixels */
+            text-align: center;
+            /* Centraliza o texto dentro do container */
+        }
+
+        /* Estilo para o container da área de desenho */
+        .drawing-container {
+            position: relative;
+            /* Define o posicionamento relativo para o container de desenho */
+            margin: auto;
+            /* Centraliza o container horizontalmente */
+            max-width: 75%;
+            /* Define a largura máxima como 75% da largura do contêiner pai */
+            border: 2px solid #6f42c1;
+            /* Adiciona uma borda sólida de 2 pixels com a cor roxa (#6f42c1) ao redor do container */
+            border-radius: 6px;
+            /* Arredonda os cantos da borda do container em 6 pixels */
+            background-color: white;
+            /* Define o fundo do container como branco */
+            height: 450px;
+            /* Define a altura do container como 450 pixels */
+            overflow: hidden;
+            /* Esconde qualquer conteúdo que exceda os limites do container */
+        }
+
+        /* Estilo para o elemento canvas dentro do container de desenho */
+        canvas {
+            width: 100%;
+            /* Define a largura do canvas como 100% do container pai */
+            height: 100%;
+            /* Define a altura do canvas como 100% do container pai */
+            border-radius: 8px;
+            /* Arredonda os cantos do canvas em 8 pixels */
+        }
+
+        /* Estilo para o seletor de cor */
+        .color-picker {
+            margin-bottom: 15px;
+            /* Adiciona 15 pixels de margem inferior ao seletor de cor */
+        }
+
+        /* Estilo para o botão de sair */
+        .btn-sair {
+            position: fixed;
+            /* Fixa o botão na tela, independentemente do rolar da página */
+            right: 20px;
+            /* Define a margem direita do botão para 20 pixels */
+            top: 20px;
+            /* Define a margem superior do botão para 20 pixels */
+            font-size: 14px;
+            /* Define o tamanho da fonte do botão como 14 pixels */
+            padding: 5px 10px;
+            /* Adiciona 5 pixels de padding superior e inferior e 10 pixels de padding lateral ao botão */
+        }
+
+        /* Estilo do botão de sair quando o mouse passa sobre ele */
+        .btn-sair:hover {
+            transform: scale(1.2);
+            /* Aumenta o tamanho do botão em 20% ao passar o mouse sobre ele */
+            background-color: #732d91;
+            /* Define uma cor de fundo mais escura para o botão ao passar o mouse sobre ele */
+            color: white;
+            /* Define a cor do texto como branca */
+        }
+
+        /* Estilo para o botão de apagar */
+        .btn-clear {
+            position: absolute;
+            /* Posiciona o botão em relação ao seu contêiner pai */
+            right: 20px;
+            /* Define a margem direita do botão para 20 pixels */
+            top: 15px;
+            /* Define a margem superior do botão para 15 pixels */
+            font-size: 14px;
+            /* Define o tamanho da fonte do botão como 14 pixels */
+            padding: 5px 10px;
+            /* Adiciona 5 pixels de padding superior e inferior e 10 pixels de padding lateral ao botão */
+            z-index: 10;
+            /* Garante que o botão fique acima de outros elementos */
+            background-color: #6f42c1;
+            /* Define a cor de fundo do botão como roxa (#6f42c1) */
+            color: white;
+            /* Define a cor do texto do botão como branca */
+            border: none;
+            /* Remove a borda padrão do botão */
+        }
+
+        /* Estilo do botão de apagar quando o mouse passa sobre ele */
+        .btn-clear:hover {
+            transform: scale(1.2);
+            /* Aumenta o tamanho do botão em 20% ao passar o mouse sobre ele */
+            background-color: #732d91;
+            /* Define uma cor de fundo mais escura para o botão ao passar o mouse sobre ele */
+            color: white;
+            /* Define a cor do texto como branca */
+        }
+    </style>
+</head>
+<body>
+<!-- Corpo da página -->
+    <!-- Container para o título com fundo transparente -->
+    <div class="title-container">
+        <h1>Área de Desenho</h1>
+        <!-- Título principal da página -->
+        <p>*Use o mouse para desenhar na tela.*</p>
+        <!-- Texto de instrução para o usuário -->
+        
+        <!-- Adiciona o seletor de cor -->
+        <div class="color-picker">
+            <label for="color">Escolha a cor do pincel aqui:</label>
+            <!-- Rótulo para o seletor de cor -->
+            <input type="color" id="color" value="#6f42c1">
+            <!-- Seletor de cor para escolher a cor do pincel com valor inicial definido como roxo (#6f42c1) -->
+        </div>
+    </div>
+
+    <!-- Container para a área de desenho -->
+    <div class="drawing-container">
+        <canvas id="drawingCanvas"></canvas>
+        <!-- Área de desenho onde o usuário pode desenhar -->
+        <button id="clearButton" class="btn btn-indigo-500 btn-clear">Apagar</button>
+        <!-- Botão para limpar o canvas -->
+    </div>
+
+    <!-- Inclua o JS do Bootstrap a partir de uma CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Importa o JavaScript do Bootstrap a partir de uma CDN para funcionalidades adicionais -->
+
+    <!-- Script para desenho no canvas -->
+    <script>
+        // Obtém o elemento canvas e seu contexto de desenho
+        const canvas = document.getElementById('drawingCanvas'); /* Obtém o elemento canvas pelo ID */
+        const ctx = canvas.getContext('2d'); /* Obtém o contexto de desenho 2D do canvas */
+        const colorPicker = document.getElementById('color'); /* Obtém o seletor de cor pelo ID */
+        const clearButton = document.getElementById('clearButton'); /* Obtém o botão de limpar pelo ID */
+
+        let painting = false; /* Flag para controlar se o usuário está desenhando */
+        let brushColor = colorPicker.value; /* Define a cor inicial do pincel com a cor do seletor */
+
+        // Atualiza a cor do pincel quando o usuário escolhe uma nova cor
+        colorPicker.addEventListener('input', () => {
+            brushColor = colorPicker.value; /* Atualiza a cor do pincel para a nova cor escolhida */
+        });
+
+        // Ajusta o tamanho do canvas para corresponder ao tamanho do contêiner pai
+        function resizeCanvas() {
+            canvas.width = canvas.clientWidth; /* Ajusta a largura do canvas para a largura do elemento pai */
+            canvas.height = canvas.clientHeight; /* Ajusta a altura do canvas para a altura do elemento pai */
+        }
+
+        window.addEventListener('resize', resizeCanvas); /* Adiciona um evento para redimensionar o canvas quando a janela for redimensionada */
+        resizeCanvas(); /* Chama a função para ajustar o tamanho do canvas inicialmente */
+
+        // Obtém a posição do mouse em relação ao canvas
+        function getMousePosition(e) {
+            const rect = canvas.getBoundingClientRect(); /* Obtém as coordenadas do canvas em relação à visualização */
+            const x = e.clientX - rect.left; /* Calcula a posição x do mouse em relação ao canvas */
+            const y = e.clientY - rect.top; /* Calcula a posição y do mouse em relação ao canvas */
+            return { x, y }; /* Retorna as coordenadas ajustadas */
+        }
+
+        // Inicia o desenho quando o botão do mouse é pressionado
+        function startPosition(e) {
+            painting = true; /* Define a flag de desenho como verdadeira quando o mouse é pressionado */
+            draw(e); /* Começa a desenhar */
+        }
+
+        // Para o desenho quando o botão do mouse é solto
+        function endPosition() {
+            painting = false; /* Define a flag de desenho como falsa quando o mouse é solto */
+            ctx.beginPath(); /* Começa um novo caminho de desenho */
+        }
+
+        // Desenha no canvas
+        function draw(e) {
+            if (!painting) return; /* Não desenha se a flag de desenho estiver falsa */
+            
+            const { x, y } = getMousePosition(e); /* Obtém as coordenadas do mouse ajustadas para o canvas */
+
+            ctx.lineWidth = 5; /* Define a largura da linha de desenho */
+            ctx.lineCap = 'round'; /* Define o estilo da ponta da linha para arredondado */
+            ctx.strokeStyle = brushColor; /* Define a cor da linha de desenho para a cor do pincel */
+
+            ctx.lineTo(x, y); /* Adiciona um ponto à linha de desenho */
+            ctx.stroke(); /* Desenha a linha */
+            ctx.beginPath(); /* Começa um novo caminho de desenho */
+            ctx.moveTo(x, y); /* Move o ponto de partida para a posição atual do mouse */
+        }
+
+        // Adiciona eventos para desenhar e limpar o canvas
+        canvas.addEventListener('mousedown', startPosition); /* Adiciona um evento para começar a desenhar quando o botão do mouse é pressionado */
+        canvas.addEventListener('mouseup', endPosition); /* Adiciona um evento para parar de desenhar quando o botão do mouse é solto */
+        canvas.addEventListener('mousemove', draw); /* Adiciona um evento para desenhar enquanto o mouse se move */
+
+        // Função para limpar o canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); /* Limpa todo o conteúdo do canvas */
+        }
+
+        // Adiciona evento para limpar o canvas quando o botão de limpar é clicado
+        clearButton.addEventListener('click', clearCanvas); /* Adiciona um evento para limpar o canvas quando o botão de limpar é clicado */
+    </script>
+
+    <!-- Botão "Sair" posicionado no canto superior direito -->
+    <a href="/html/Atv.bootstrap.html" class="btn btn-light btn-sair">Sair</a>
+    <!-- Link para redirecionar para outra página -->
+</body>
+</html>
